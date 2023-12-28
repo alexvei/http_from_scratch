@@ -3,7 +3,9 @@
 
 /* reasoning: understanding HTTP better */
 
+use std::io::prelude::*;
 use std::net::TcpListener;
+use std::net::TcpStream;
 
 fn main() {
     /* creating a local tcplistener at port 8477 */
@@ -23,6 +25,18 @@ fn main() {
 
     for stream in listener.incoming() {
         let _stream = stream.unwrap();
-        println!("connection established!")
+
+        /*call function that handles the incoming connection (aka stream)*/
+        handle_connection(_stream);
     }
+}
+
+/* function that actually handles the incoming connections */
+
+fn handle_connection(mut stream: TcpStream) {
+    let mut buffer = [0; 1024];
+
+    stream.read(&mut buffer).unwrap();
+
+    println!("request: {}", String::from_utf8_lossy(&buffer[..]));
 }
