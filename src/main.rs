@@ -10,7 +10,7 @@ use std::net::TcpStream;
 
 fn main() {
     /* creating a local tcplistener at port 8477 */
-    const HOST: &str = "127.0.0.1";
+    const HOST: &str = "0.0.0.0";
     const PORT: &str = "8477";
 
     /* concat host address and port for final end point*/
